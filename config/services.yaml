@@ -22,3 +22,24 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Extend Articles with custom fields
+    App\Content\DataMapper\ArticleCustomFieldsDataMapper:
+        tags:
+            - { name: 'sulu_content.data_mapper', priority: 64 }
+
+    App\Content\Normalizer\ArticleCustomFieldsNormalizer:
+        tags:
+            - { name: 'sulu_content.normalizer', priority: 20 }
+
+    App\Content\Merger\ArticleCustomFieldsMerger:
+        tags:
+            - { name: 'sulu_content.merger', priority: 20 }
+
+    # Admin: Article Additional Tab
+    App\Admin\ArticleAdditionalAdmin:
+        arguments:
+            $groupProvider: '@sulu_admin.metadata_group_provider'
+        tags:
+            - { name: sulu.admin }
+            - { name: sulu.context, context: admin }

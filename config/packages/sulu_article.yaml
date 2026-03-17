@@ -1,1 +1,6 @@
-sulu_article: {}
+sulu_article:
+    objects:
+        article:
+            model: App\Entity\Article
+        article_content:
+            model: App\Entity\ArticleDimensionContent
