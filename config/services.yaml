@@ -22,3 +22,27 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Extend Page with custom fields
+    App\Content\DataMapper\PageCustomFieldsDataMapper:
+        tags:
+            - { name: 'sulu_content.data_mapper', priority: 64 }
+
+    App\Content\Normalizer\PageCustomFieldsNormalizer:
+        tags:
+            - { name: 'sulu_content.normalizer', priority: 20 }
+
+    App\Content\Merger\PageCustomFieldsMerger:
+        tags:
+            - { name: 'sulu_content.merger', priority: 20 }
+
+    # Admin: Page Additional Tab
+    App\Admin\PageAdditionalAdmin:
+        tags:
+            - { name: sulu.admin }
+            - { name: sulu.context, context: admin }
+
+    # Fix inherited association 'declared' property + Gedmo tree alias for overridden Page entity
+    App\Doctrine\EventSubscriber\InheritedAssociationDeclaredFixerSubscriber:
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata, priority: -100 }

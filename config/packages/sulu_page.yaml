@@ -1,0 +1,6 @@
+sulu_page:
+    objects:
+        page:
+            model: App\Entity\Page
+        page_content:
+            model: App\Entity\PageDimensionContent

@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<form xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/form-1.0.xsd"
+>
+    <key>page_additional_data</key>
+
+    <properties>
+        <section name="additional_data">
+            <properties>
+                <property name="notes" type="text_area">
+                    <meta>
+                        <title>Notes</title>
+                    </meta>
+                </property>
+                <property name="information" type="text_area">
+                    <meta>
+                        <title>Information</title>
+                    </meta>
+                </property>
+            </properties>
+        </section>
+    </properties>
+</form>
