@@ -24,6 +24,10 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        hydrators:
+            # Overrides Sulu's sulu_page_tree hydrator to fix Gedmo bug with Doctrine ORM 3.x
+            # ManyToOneAssociationMapping does not have 'mappedBy' — skip owning-side associations
+            sulu_page_tree: App\Doctrine\Hydrator\SafeTreeObjectHydrator
         controller_resolver:
             auto_mapping: false
 
