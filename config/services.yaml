@@ -36,6 +36,23 @@ services:
         tags:
             - { name: 'sulu_content.merger', priority: 20 }
 
+    # Workaround: Override sulu_article.article_route_defaults_provider to fix Sulu bug in
+    # ContentRouteDefaultsProvider which hardcodes Article::class (a MappedSuperclass) instead
+    # of using the configured sulu.model.article.class parameter.
+    App\Route\ArticleRouteDefaultsProvider:
+        arguments:
+            $metadataProviderRegistry: '@sulu_admin.metadata_provider_registry'
+            $cacheLifetimeResolver: '@sulu_http_cache.cache_lifetime.resolver'
+            $webspaceManager: '@sulu_core.webspace.webspace_manager'
+            $environment: '%kernel.environment%'
+            $articleEntityClass: '%sulu.model.article.class%'
+        tags:
+            - { name: sulu_route.route_defaults_provider, resource_key: articles }
+
+    sulu_article.article_route_defaults_provider:
+        alias: App\Route\ArticleRouteDefaultsProvider
+        public: true
+
     # Admin: Article Additional Tab
     App\Admin\ArticleAdditionalAdmin:
         arguments:
